@@ -1,12 +1,18 @@
 import sys
 
+def input():
+    while True:
+        try:
+            sys.stdout.write("$ ")
+            command = input()
+            if not command:
+                continue
+            print(f"{command}: command not found")
+        except (EOFError, KeyboardInterrupt):
+            print()
+            break
 
-def main():
-    sys.stdout.write("$ ")
-    command = input()
-    print(f"{command}: command not found")
-    return
 
 
 if __name__ == "__main__":
-    main()
+    input()
