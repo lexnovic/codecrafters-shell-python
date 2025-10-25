@@ -1,6 +1,6 @@
 import sys
 
-def input():
+def repl():
     while True:
         try:
             sys.stdout.write("$ ")
@@ -15,4 +15,4 @@ def input():
 
 
 if __name__ == "__main__":
-    input()
+    repl()
