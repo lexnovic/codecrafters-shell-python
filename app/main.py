@@ -38,7 +38,7 @@ def do_type(parts):
         if parts[1] in builtin_commands:
             print(f"{parts[1]} is a shell builtin")
         else:
-            print(f"{parts[1]}: command not found")
+            print(f"{parts[1]}: not found")
 
 
 if __name__ == "__main__":
