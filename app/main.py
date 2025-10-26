@@ -8,14 +8,24 @@ def repl():
             if not command:
                 continue
             if "exit" in command:
-                exit()
-            print(f"{command}: command not found")
+                do_exit()
+            elif "echo" in command:
+                do_echo(command)
+            else:
+                print(f"{command}: command not found")
         except (EOFError, KeyboardInterrupt):
             print()
             break
 
-def exit():
+def do_exit():
     sys.exit(0)
+
+def do_echo(command):
+    parts = command.split()
+    if len(parts) > 1:
+        print(" ".join(parts[1:]))
+    else:
+        print()
 
 
 if __name__ == "__main__":
