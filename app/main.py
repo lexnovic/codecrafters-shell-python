@@ -7,14 +7,15 @@ def repl():
         try:
             sys.stdout.write("$ ")
             command = input()
+            parts = command.split()
             if not command:
                 continue
-            elif "exit" in command:
+            elif parts[0] == "exit":
                 do_exit()
-            elif "echo" in command:
-                do_echo(command)
-            elif "type" in command:
-                do_type(command)
+            elif parts[0] == "echo":
+                do_echo(parts)
+            elif parts[0] == "type":
+                do_type(parts)
             else:
                 print(f"{command}: command not found")
         except (EOFError, KeyboardInterrupt):
@@ -24,15 +25,13 @@ def repl():
 def do_exit():
     sys.exit(0)
 
-def do_echo(command):
-    parts = command.split()
+def do_echo(parts):
     if len(parts) > 1:
         print(" ".join(parts[1:]))
     else:
         print()
 
-def do_type(command):
-    parts = command.split()
+def do_type(parts):
     if len(parts) == 1:
         print("Specify command.")
     else:
