@@ -38,6 +38,7 @@ def find_in_path(cmd):
         full_path = (os.path.join(path, cmd))
         if os.path.exists(full_path):
             return full_path
+            break
 
 def do_type(parts):
     if len(parts) == 1:
