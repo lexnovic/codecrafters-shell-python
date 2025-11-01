@@ -34,7 +34,7 @@ def do_echo(parts):
 
 def find_in_path(cmd):
     paths = os.environ.get("PATH", "").split(os.pathsep)
-    for path in paths:
+    for path in reversed(paths):
         full_path = (os.path.join(path, cmd))
         if os.path.exists(full_path):
             return full_path
