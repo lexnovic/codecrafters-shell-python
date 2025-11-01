@@ -36,6 +36,7 @@ def find_in_path(cmd):
     paths = os.environ.get("PATH", "").split(os.pathsep)
     for path in paths:
         full_path = (os.path.join(path, cmd))
+        path_count = 0
         if os.path.exists(full_path):
             path_count += 1
             if path_count == 2:
