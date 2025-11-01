@@ -39,8 +39,8 @@ def do_type(parts):
         if parts[1] in builtin_commands:
             print(f"{parts[1]} is a shell builtin")
         elif parts[1] not in builtin_commands:
-            if os.path.exists(parts[1:]):
-                print(f"{os.path.dirname(parts[1:])}")
+            if os.path.exists(parts[1]):
+                print(f"{parts[1]} is {os.path.dirname(parts[1:])}")
             else:
                 print(f"{parts[1]}: not found")
 
