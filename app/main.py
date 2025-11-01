@@ -32,17 +32,27 @@ def do_echo(parts):
     else:
         print()
 
+def find_in_path(cmd):
+    paths = os.environ.get("PATH", "").split(os.pathsep)
+    for path in paths:
+        full_path = (os.path.join(path, cmd))
+        if os.path.exists(full_path) and os.access(full_path, os.X_OK):
+            return full_path
+        return None
+
 def do_type(parts):
     if len(parts) == 1:
         print("Specify command.")
     else:
-        if parts[1] in builtin_commands:
-            print(f"{parts[1]} is a shell builtin")
-        elif parts[1] not in builtin_commands:
-            if os.path.exists(parts[1]):
-                print(f"{parts[1]} is {os.path.dirname(parts[1:])}")
+        cmd = parts[1]
+        if cmd in builtin_commands:
+            print(f"{cmd} is a shell builtin")
+        else:
+            path = find_in_path(cmd)
+            if path:
+                print(f"{cmd} is {path}")
             else:
-                print(f"{parts[1]}: not found")
+                print(f"{cmd}: not found")
 
 
 if __name__ == "__main__":
