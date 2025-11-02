@@ -35,12 +35,10 @@ def do_echo(parts):
 def find_in_path(cmd):
     paths = os.environ.get("PATH", "").split(os.pathsep)
     for path in paths:
-        full_path = (os.path.join(path, cmd))
-        path_count = 0
-        if os.path.exists(full_path):
-            path_count += 1
-            if path_count == 2:
-                return full_path
+        full_path = os.path.join(path, cmd)
+        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
+            return full_path
+    return None
 
 def do_type(parts):
     if len(parts) == 1:
