@@ -6,6 +6,7 @@ def repl():
     while True:
         try:
             sys.stdout.write("$ ")
+            sys.stdout.flush()
             command = input()
             parts = command.split()
             if not command:
@@ -17,7 +18,7 @@ def repl():
             elif parts[0] == "type":
                 do_type(parts)
             elif find_in_path(parts[0]) or parts[0] in builtin_commands:
-                p = subprocess.Popen(parts)
+                p = subprocess.run(parts)
             else:
                 print(f"{command}: command not found")
         except (EOFError, KeyboardInterrupt):
