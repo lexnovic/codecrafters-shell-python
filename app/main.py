@@ -1,5 +1,4 @@
-import sys
-import os
+import sys, os, shlex, subprocess
 
 builtin_commands = ["exit", "echo", "type"]
 
@@ -17,6 +16,8 @@ def repl():
                 do_echo(parts)
             elif parts[0] == "type":
                 do_type(parts)
+            elif find_in_path(parts[0]) or parts[0] in builtin_commands:
+                p = subprocess.Popen(parts)
             else:
                 print(f"{command}: command not found")
         except (EOFError, KeyboardInterrupt):
