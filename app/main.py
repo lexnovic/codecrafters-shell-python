@@ -1,6 +1,6 @@
 import sys, os, shlex, subprocess
 
-builtin_commands = ["exit", "echo", "type"]
+builtin_commands = ["exit", "echo", "type", "pwd"]
 
 def repl():
     while True:
@@ -17,6 +17,8 @@ def repl():
                 do_echo(parts)
             elif parts[0] == "type":
                 do_type(parts)
+            elif parts[0] == "pwd":
+                do_pwd()
             elif find_in_path(parts[0]) or parts[0] in builtin_commands:
                 p = subprocess.run(parts)
             else:
@@ -24,6 +26,10 @@ def repl():
         except (EOFError, KeyboardInterrupt):
             print()
             break
+
+def do_pwd():
+    cwd = os.getcwd()
+    print(cwd)
 
 def do_exit():
     sys.exit(0)
