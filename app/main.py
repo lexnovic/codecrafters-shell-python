@@ -1,6 +1,6 @@
 import sys, os, shlex, subprocess
 
-builtin_commands = ["exit", "echo", "type", "pwd"]
+builtin_commands = ["exit", "echo", "type", "pwd", "cd"]
 
 def repl():
     while True:
@@ -19,6 +19,8 @@ def repl():
                 do_type(parts)
             elif parts[0] == "pwd":
                 do_pwd()
+            elif parts[0] == "cd":
+                do_cd(parts)
             elif find_in_path(parts[0]) or parts[0] in builtin_commands:
                 p = subprocess.run(parts)
             else:
@@ -26,6 +28,14 @@ def repl():
         except (EOFError, KeyboardInterrupt):
             print()
             break
+
+def do_cd(parts):
+    path = parts[1:]
+    if os.access(path, os.R_OK):
+        os.chdir(path)
+    else:
+        print(f"cd: {path}: No such file or directory.")
+
 
 def do_pwd():
     cwd = os.getcwd()
