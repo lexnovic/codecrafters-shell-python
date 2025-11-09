@@ -35,12 +35,10 @@ def do_cd(parts):
         return
     
     path = parts[1]
+    path = os.path.expanduser(path)
     if os.path.isdir(path):
         try:
-            if "~" in path:
-                os.chdir(os.getenv('HOME'))
-            else:
-                os.chdir(path)
+            os.chdir(path)
         except PermissionError:
             print(f"cd: {path}: Permission denied")
     else:
