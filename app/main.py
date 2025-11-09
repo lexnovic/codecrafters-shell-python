@@ -8,7 +8,7 @@ def repl():
             sys.stdout.write("$ ")
             sys.stdout.flush()
             command = input()
-            parts = list(command)
+            parts = command.split()
             if not command:
                 continue
             elif parts[0] == "exit":
