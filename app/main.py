@@ -30,9 +30,16 @@ def repl():
             break
 
 def do_cd(parts):
-    path = parts[1:]
-    if os.access(path, os.R_OK):
-        os.chdir(path)
+    if len(parts) < 2:
+        print("cd: missing argument")
+        return
+    
+    path = parts[1]
+    if os.path.isdir(path):
+        try:
+            os.chdir(path)
+        except PermissionError:
+            print(f"cd: {path}: Permission denied.")
     else:
         print(f"cd: {path}: No such file or directory.")
 
