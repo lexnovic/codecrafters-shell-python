@@ -39,9 +39,9 @@ def do_cd(parts):
         try:
             os.chdir(path)
         except PermissionError:
-            print(f"cd: {path}: Permission denied.")
+            print(f"cd: {path}: Permission denied")
     else:
-        print(f"cd: {path}: No such file or directory.")
+        print(f"cd: {path}: No such file or directory")
 
 
 def do_pwd():
